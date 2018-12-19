@@ -20,6 +20,7 @@ Asteroid targetedAsteroid;
 Player p;
 PlayerInterface PI;
 vector<Circle> star(100);
+vector<Circle> flames(100);
 
 
 /**
@@ -60,6 +61,9 @@ void asteroidDestroy(){
 
 void drawStars() {
 
+    for (int i = 0; i < flames.size(); ++i) {
+        flames[i].draw();
+    }
 
     // draw the stars
     for (int i = 0; i < star.size(); ++i) {
@@ -99,6 +103,19 @@ void init() {
                          {1, 1, 1},
                          {rand() % (int) width, rand() % (int) height});
     }
+    /**
+     * Creating flames
+     */
+    for (int i = 0; i < flames.size(); ++i) {
+        flames[i] = Circle(rand() % 7 + 4,
+                           {1, 0, 0},
+                           {rand() % (int) width, rand() % (int) height});
+    }
+    for (int i = 0; i < flames.size(); ++i) {
+        int randX = rand()%(110-90 + 1) + 90;
+        int randY = rand()%(25-20 + 1) + 20;
+        flames[i].set_position(p.getPosition().getX() + randX, p.getPosition().getY() + randY);
+    }
 }
 
 /* Initialize OpenGL Graphics */
@@ -108,6 +125,8 @@ void initGL() {
 }
 
 void gamePlayScreen() {
+
+    drawStars();
 
     p.draw();
 
@@ -145,7 +164,6 @@ void display() {
     /*
      * Draw here
      */
-    drawStars();
 
     gamePlayScreen();
 
@@ -223,6 +241,18 @@ void timer(int extra) {
         star[i].move(0, star[i].get_radius());
         if (star[i].get_y() > height) {
             star[i].set_position(rand() % (int) width, 100);
+        }
+    }
+
+    for (int i = 0; i < flames.size(); ++i) {
+        flames[i].move(0, flames[i].get_radius() / 2);
+        // if the star went off the left side of the screen
+        // move it to the right side at a random y location
+        if (flames[i].get_y() > height) {
+            int randX = rand()%(110-90 + 1) + 90;
+            int randY = rand()%(25-20 + 1) + 20;
+
+            flames[i].set_position(p.getPosition().getX() + randX, p.getPosition().getY() + randY);
         }
     }
 

@@ -81,22 +81,20 @@ void Player::draw() {
 
     unsigned short player_texture [(16 * 16)] = {
             //touches bottom screen
+            X,X,X,X,W,X,X,X,X,X,X,W,X,X,X,X,
+            X,X,X,X,W,W,B,W,W,B,W,W,X,X,X,X,
+            X,X,X,X,W,W,W,W,W,W,W,W,X,X,X,X,
+            X,X,X,X,W,W,W,W,W,W,W,W,X,X,X,X,
+            X,X,X,X,W,W,W,W,W,W,W,W,X,X,X,X,
+            X,X,X,X,W,X,W,W,W,W,X,W,X,X,X,X,
+            X,X,X,X,X,X,W,B,B,W,X,X,X,X,X,X,
+            X,X,X,X,X,X,W,W,W,W,X,X,X,X,X,X,
+            X,X,X,X,X,X,X,W,W,X,X,X,X,X,X,X,
+            X,X,X,X,X,X,X,W,W,X,X,X,X,X,X,X,
+            X,X,X,X,X,X,X,W,W,X,X,X,X,X,X,X,
+            X,X,X,X,X,X,X,W,W,X,X,X,X,X,X,X,
             X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
-            X,X,X,R,W,W,R,X,X,R,W,W,R,X,X,X,
-            X,X,X,X,R,R,R,R,R,R,R,R,X,X,X,X,
-            X,X,X,X,G,R,R,R,R,R,R,G,X,X,X,X,
-            X,X,X,X,G,X,R,R,R,R,X,G,X,X,X,X,
-            X,X,X,X,G,X,R,R,R,R,X,G,X,X,X,X,
-            X,X,X,X,X,X,R,B,B,R,X,X,X,X,X,X,
-            X,X,X,X,X,X,R,B,B,R,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,R,R,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,R,R,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,W,W,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,W,W,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,W,W,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,B,B,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,B,B,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,B,B,X,X,X,X,X,X,X,
+
 
             //points towards aseroids (gun point)
     };
