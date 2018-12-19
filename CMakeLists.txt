@@ -13,6 +13,8 @@ file(GLOB SOURCE_FILES
         *.h
         )
 
-add_executable(main.cpp ${SOURCE_FILES} AbstractSpaceObject.cpp AbstractSpaceObject.h Position.cpp Position.h Asteroid.cpp Asteroid.h Laser.cpp Laser.h Player.cpp Player.h Sentence.cpp Sentence.h PlayerInterface.cpp PlayerInterface.h)
+add_executable(main.cpp ${SOURCE_FILES} AbstractSpaceObject.cpp AbstractSpaceObject.h
+        Position.cpp Position.h Asteroid.cpp Asteroid.h Laser.cpp Laser.h Player.cpp Player.h
+        Sentence.cpp Sentence.h PlayerInterface.cpp PlayerInterface.h Shape.cpp Shape.h)
 
 target_link_libraries (main.cpp ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})

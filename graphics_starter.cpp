@@ -4,11 +4,10 @@
 #include "Player.h"
 #include "PlayerInterface.h"
 #include "string"
-#include <unistd.h>
+#include "Shape.h"
 GLdouble width, height;
 int wd;
 
-void aseteroidDestroy();
 
 /**
  * Intializing objects
@@ -19,6 +18,8 @@ Asteroid asteroidThree;
 Asteroid targetedAsteroid;
 Player p;
 PlayerInterface PI;
+vector<Circle> star(100);
+
 
 /**
  * Asteroid Belt (or drawn asteroids)
@@ -54,6 +55,15 @@ void asteroidDestroy(){
     }
 }
 
+void drawStars() {
+
+
+    // draw the stars
+    for (int i = 0; i < star.size(); ++i) {
+        star[i].draw();
+    }
+}
+
 void init() {
     /**
      * Initializing all objects positions
@@ -76,6 +86,16 @@ void init() {
     asteroidBelt[0].setTargeted(true); targetedAsteroid = asteroidOne; PI.setTargetedAsteroid(targetedAsteroid);
     drawVec.push_back(asteroidOne); drawVec.push_back(asteroidTwo);
     drawVec.push_back(asteroidThree); drawVec.push_back(p);
+
+
+    /**
+     * Creating stars
+     */
+    for (int i = 0; i < star.size(); ++i) {
+        star[i] = Circle(rand() % 3 + 1,
+                         {1, 1, 1},
+                         {rand() % (int) width, rand() % (int) height});
+    }
 }
 
 /* Initialize OpenGL Graphics */
@@ -105,6 +125,8 @@ void gamePlayScreen() {
      * Draw what user types
      */
     PI.draw(width, height);
+
+
 }
 
 /* Handler for window-repaint event. Call back when the window first appears and
@@ -126,7 +148,10 @@ void display() {
     /*
      * Draw here
      */
+    drawStars();
+
     gamePlayScreen();
+
 
 
     glFlush();  // Render now
@@ -195,6 +220,15 @@ void timer(int extra) {
     for (int i = 0; i < asteroidBelt.size(); i++){
         asteroidBelt[i].move(0,1);
     }
+
+    for (int i = 0; i < star.size(); ++i) {
+        cout << star[i].get_radius() << endl;
+        star[i].move(0, star[i].get_radius());
+        if (star[i].get_y() > height) {
+            star[i].set_position(rand() % (int) width, 100);
+        }
+    }
+
     glutPostRedisplay();
     glutTimerFunc(30, timer, 0);
 }

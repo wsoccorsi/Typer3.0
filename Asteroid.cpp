@@ -28,11 +28,12 @@ void Asteroid::draw() {
         glColor3f(1,1,0);
         glRasterPos2i(getPosition().getX(), getPosition().getY());
         for (int i = 0; i < getSentence().getString().size(); ++i) {
+
             if (userTyped[i] == getSentence().getString()[i] && getTargeted()) {
                 glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getSentence().getString()[i]);
             } else {
 
-                glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, getSentence().getString()[i]);
+                glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, getSentence().getString()[i]);
             }
         }
     } else {
@@ -43,7 +44,7 @@ void Asteroid::draw() {
                 glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getSentence().getString()[i]);
             } else {
 
-                glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, getSentence().getString()[i]);
+                glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, getSentence().getString()[i]);
             }
         }
     }
