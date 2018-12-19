@@ -4,6 +4,9 @@
 
 #include "Asteroid.h"
 #include "graphics.h"
+using namespace std;
+#include <iostream>
+#include <string>
 
 Asteroid::Asteroid() {
 
@@ -24,12 +27,17 @@ void Asteroid::move(int x, int y) {
 void Asteroid::draw() {
 
 
+
     if (getTargeted()) {
         glColor3f(1,1,0);
         glRasterPos2i(getPosition().getX(), getPosition().getY());
+
         for (int i = 0; i < getSentence().getString().size(); ++i) {
 
-            if (userTyped[i] == getSentence().getString()[i] && getTargeted()) {
+            if (userTyped[i] == getSentence().getString()[i] && getTargeted()
+                //edge case for correct linear inputs
+                && userTyped.substr(0,i) == getSentence().getString().substr(0,i))
+              {
                 glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getSentence().getString()[i]);
             } else {
 
@@ -40,7 +48,9 @@ void Asteroid::draw() {
         glColor3f(1,1,1);
         glRasterPos2i(getPosition().getX(), getPosition().getY());
         for (int i = 0; i < getSentence().getString().size(); ++i) {
-            if (userTyped[i] == getSentence().getString()[i] && getTargeted()) {
+            if (userTyped[i] == getSentence().getString()[i] && getTargeted()
+                //edge case for correct linear inputs
+                && userTyped.substr(0,i) == getSentence().getString().substr(0,i)) {
                 glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getSentence().getString()[i]);
             } else {
 

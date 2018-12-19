@@ -10,6 +10,7 @@ int wd;
 
 
 /**
+ *
  * Intializing objects
  */
 Asteroid asteroidOne;
@@ -52,6 +53,8 @@ void asteroidDestroy(){
             }
         }
         targetedAsteroid = PI.tabAsteroidTarget(asteroidBelt);
+        p.setPosition(Position(targetedAsteroid.getPosition().getX() - 60, p.getPosition().getY()));
+
     }
 }
 
@@ -75,7 +78,6 @@ void init() {
     asteroidOne = Asteroid(Position(width/2 - 300, 150), 1);
     asteroidTwo = Asteroid(Position(width/2, 150), 2);
     asteroidThree = Asteroid(Position(width/2 + 300, 150), 3);
-    p = Player(Position(width/2 - 300, height/2));
 
 
     /**
@@ -84,6 +86,7 @@ void init() {
     asteroidBelt.push_back(asteroidOne); asteroidBelt.push_back(asteroidTwo); asteroidBelt.push_back(asteroidThree);
     p.sizeOfBelt(asteroidBelt.size());
     asteroidBelt[0].setTargeted(true); targetedAsteroid = asteroidOne; PI.setTargetedAsteroid(targetedAsteroid);
+    p = Player(Position(targetedAsteroid.getPosition().getX() - 60, height/2 + 370));
     drawVec.push_back(asteroidOne); drawVec.push_back(asteroidTwo);
     drawVec.push_back(asteroidThree); drawVec.push_back(p);
 
@@ -106,6 +109,8 @@ void initGL() {
 
 void gamePlayScreen() {
 
+    p.draw();
+
     /**
      * Drawling asteroid belt
      */
@@ -114,19 +119,11 @@ void gamePlayScreen() {
         asteroidBelt[i].playerInteraction(p);
     }
 
-    /**
-     * Polymorphism, w/ draw functionality
-     */
-    for(int i = 0; i < drawVec.size(); i++){
-        drawVec[i].draw();
-    }
 
     /**
      * Draw what user types
      */
     PI.draw(width, height);
-
-
 }
 
 /* Handler for window-repaint event. Call back when the window first appears and
@@ -170,6 +167,7 @@ void kbd(unsigned char key, int x, int y)
     if(key == 9) {
             targetedAsteroid = PI.tabAsteroidTarget(asteroidBelt);
             p.resetUserTyped();
+            p.setPosition(Position(targetedAsteroid.getPosition().getX() - 60, p.getPosition().getY()));
             PI.resetUserTyped();
         }
 
@@ -222,7 +220,6 @@ void timer(int extra) {
     }
 
     for (int i = 0; i < star.size(); ++i) {
-        cout << star[i].get_radius() << endl;
         star[i].move(0, star[i].get_radius());
         if (star[i].get_y() > height) {
             star[i].set_position(rand() % (int) width, 100);

@@ -10,6 +10,7 @@
 #include "Sentence.h"
 #include "Player.h"
 
+
 class Asteroid : public AbstractSpaceObject {
 
 

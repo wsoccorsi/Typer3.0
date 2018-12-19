@@ -14,12 +14,12 @@ PlayerInterface::PlayerInterface() {
 void PlayerInterface::draw(int width, int height) {
 
     //Creates the section box
-    glColor3f(.5, .6, .3);
+    glColor3f(.5, .4, .4);
     glBegin(GL_QUADS);
-    glTexCoord2f(0, 0); glVertex2i(0, height);
-    glTexCoord2f(1, 0); glVertex2i(width, height);
-    glTexCoord2f(1, 1); glVertex2i(width, height /2 + 350);
-    glTexCoord2f(0, 1); glVertex2i(0, height /2 + 350);
+    glTexCoord2f(0, 0); glVertex2i(300, height);
+    glTexCoord2f(1, 0); glVertex2i(width - 300, height);
+    glTexCoord2f(1, 1); glVertex2i(width - 200, height /2 + 375);
+    glTexCoord2f(0, 1); glVertex2i(200, height /2 + 375);
     glEnd();
 
     //Creates the input box
