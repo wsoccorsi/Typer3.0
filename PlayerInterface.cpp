@@ -13,8 +13,10 @@ PlayerInterface::PlayerInterface() {
 
 void PlayerInterface::draw(int width, int height) {
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glColor4f(1, 1, 1, .5);
     //Creates the section box
-    glColor3f(.5, .4, .4);
     glBegin(GL_QUADS);
     glTexCoord2f(0, 0); glVertex2i(300, height - 50);
     glTexCoord2f(1, 0); glVertex2i(width - 300, height - 50);
@@ -23,23 +25,31 @@ void PlayerInterface::draw(int width, int height) {
     glEnd();
 
     //Creates the input box
-    glColor3f(1, 1, 1);
+    glColor3f(1,1,1);
     glBegin(GL_QUADS);
-    glTexCoord2f(0, 0); glVertex2i(width/2 - 100, height-100);
-    glTexCoord2f(1, 0); glVertex2i(width/2 +100, height-100);
-    glTexCoord2f(1, 1); glVertex2i(width/2 + 100, height /2 + 450);
-    glTexCoord2f(0, 1); glVertex2i(width/2- 100, height /2 + 450);
+    glTexCoord2f(0, 0); glVertex2i(width/2 - 100, height/2 + 375);
+    glTexCoord2f(1, 0); glVertex2i(width/2 +100, height/2 + 375);
+    glTexCoord2f(1, 1); glVertex2i(width/2 + 100, height /2 + 415);
+    glTexCoord2f(0, 1); glVertex2i(width/2- 100, height /2 + 415);
     glEnd();
 
     glColor3f(0,0,0);
-    glRasterPos2i(width/2 - 50, height-70);
+    glRasterPos2i(width/2 - 50, height-25);
 
     for (int i = 0; i < getUserTyped().size(); ++i) {
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getUserTyped()[i]);
     }
 
+    glRasterPos2i(width/2 + 175, height-70);
+    string temp = "Score: " + to_string(score);
+    for(int i = 0; i < temp.size(); i++) {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, temp[i]);
+    }
 }
 
+void PlayerInterface::getPlayerScore(int s) {
+    score = s;
+}
 string PlayerInterface::getUserTyped() const{
     return userTyped;
 }
@@ -103,6 +113,11 @@ string PlayerInterface::keyStrokeListener(int key, int wd) {
 
     if (userTyped.size() <= targetedAsteroid.getSentence().getString().size()) {
         switch (key) {
+            case 32:
+                if (userTyped.size() != 0) {
+                    userTyped += " ";
+                }
+                break;
 
             case 'a':
                 //cout << "a" << endl;

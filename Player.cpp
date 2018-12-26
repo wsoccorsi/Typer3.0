@@ -58,6 +58,14 @@ void Player::resetUserTyped() {
     userTyped.clear();
 }
 
+int Player::getScore() {
+    return score;
+}
+
+void Player::setScore(int s) {
+    score = s;
+}
+
 void Player::draw() {
 
     /** Following texture code from:
@@ -112,15 +120,10 @@ void Player::draw() {
 
     glEnable(GL_TEXTURE_2D);
     glBegin(GL_QUADS);
-    glTexCoord2f(0, 0); glVertex2i(getPosition().getX(), getPosition().getY());//glVertex2f(16,  16);
-    glTexCoord2f(1, 0); glVertex2i(getPosition().getX() + 200, getPosition().getY());//glVertex2f(0, 16);
-    glTexCoord2f(1, 1); glVertex2i(getPosition().getX() + 200, getPosition().getY() -100);//glVertex2f(0,0);
-    glTexCoord2f(0, 1); glVertex2i(getPosition().getX(), getPosition().getY() -100);//glVertex2f(16, 0);
-
-    glEnd();
-
-    glDisable(GL_TEXTURE_2D);
-
+    glTexCoord2f(0, 0); glVertex2i(getPosition().getX(), getPosition().getY() - 50);//glVertex2f(16,  16);
+    glTexCoord2f(1, 0); glVertex2i(getPosition().getX() + 200, getPosition().getY() - 50);//glVertex2f(0, 16);
+    glTexCoord2f(1, 1); glVertex2i(getPosition().getX() + 200, getPosition().getY() - 150);//glVertex2f(0,0);
+    glTexCoord2f(0, 1); glVertex2i(getPosition().getX(), getPosition().getY() - 150);//glVertex2f(16, 0);
 
     glEnd();
 

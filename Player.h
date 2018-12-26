@@ -43,6 +43,10 @@ public:
 
     void resetUserTyped();
 
+    void setScore(int s);
+
+    int getScore();
+
 protected:
 
     string name;
@@ -52,6 +56,8 @@ protected:
     int selected = 0;
 
     int beltSize;
+
+    int score;
 };
 
 

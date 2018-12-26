@@ -47,3 +47,11 @@ void AbstractSpaceObject::setIsDrawn(bool b) {
     isDrawn = b;
 }
 
+int AbstractSpaceObject::getSize() {
+    return size;
+}
+
+void AbstractSpaceObject::setSize(int s) {
+    size = s;
+}
+

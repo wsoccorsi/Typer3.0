@@ -29,11 +29,16 @@ public:
 
     void setTargetedAsteroid(Asteroid &a);
 
+    void getPlayerScore(int s);
+
+
+
 private:
     string userTyped;
 
     Asteroid targetedAsteroid;
 
+    int score;
 };
 
 

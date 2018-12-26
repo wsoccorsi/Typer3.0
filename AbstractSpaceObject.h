@@ -6,6 +6,11 @@
 #define TYPER3_0_SHE_DIDN_T_WORK_SO_GOOD_MR_STARK_ABSTRACTSPACEOBJECT_H
 
 #include "Position.h"
+struct Color {
+    double red;
+    double green;
+    double blue;
+};
 
 class AbstractSpaceObject {
 
@@ -31,6 +36,10 @@ public:
 
     virtual void setIsDrawn(bool b);
 
+    virtual int getSize();
+
+    virtual void setSize(int s);
+
 private:
 
     int health;
@@ -38,6 +47,8 @@ private:
     Position p;
 
     bool isDrawn;
+
+    int size;
 
 
 };

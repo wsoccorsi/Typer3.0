@@ -5,12 +5,12 @@
 #include "PlayerInterface.h"
 #include "string"
 #include "Shape.h"
+#include "Button.h"
 GLdouble width, height;
 int wd;
-
+enum screen {endo, game, starto}; screen selectedScreen;
 
 /**
- *
  * Intializing objects
  */
 Asteroid asteroidOne;
@@ -22,6 +22,10 @@ PlayerInterface PI;
 vector<Circle> star(100);
 vector<Circle> flames(100);
 
+/**
+ * Buttons
+ */
+Button buttonTest(400, 75);
 
 /**
  * Asteroid Belt (or drawn asteroids)
@@ -29,7 +33,73 @@ vector<Circle> flames(100);
 vector<Asteroid> asteroidBelt;
 vector<AbstractSpaceObject> drawVec;
 
+void drawStars() {
 
+    for (int i = 0; i < flames.size(); ++i) {
+        flames[i].draw();
+    }
+
+    // draw the stars
+    for (int i = 0; i < star.size(); ++i) {
+        star[i].draw();
+    }
+}
+
+void startScreen() {
+    // draw the stars
+    for (int i = 0; i < star.size(); ++i) {
+        star[i].draw();
+    }
+
+    buttonTest.setPosition(Position(width/2 - 200, height/2));
+    buttonTest.setMessage("Start New Game");
+    buttonTest.draw();
+    glRasterPos2i(width/2 - 100, height/2);
+    glColor3f(1,1,1);
+    string endScreen = "Welcome to TYPER!";
+    for (int i = 0; i < endScreen.size(); i++){
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, endScreen[i]);
+    }
+
+}
+
+void gamePlayScreen() {
+
+    if (selectedScreen == game) {
+        cout << "here" << endl;
+        drawStars();
+
+        p.draw();
+
+        /**
+         * Drawling asteroid belt
+         */
+        for (int i = 0; i < asteroidBelt.size(); i++) {
+            asteroidBelt[i].draw();
+            asteroidBelt[i].setIsDrawn(true);
+            asteroidBelt[i].playerInteraction(p);
+        }
+
+
+        /**
+         * Draw what user types
+         */
+        PI.draw(width, height);
+    }
+}
+
+void endScreen() {
+    glRasterPos2i(width/2 - 100, height/2);
+    glColor3f(1,1,1);
+    string endScreen = "You DIED! Try Again?";
+    for (int i = 0; i < endScreen.size(); i++){
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, endScreen[i]);
+    }
+    // draw the stars
+    for (int i = 0; i < star.size(); ++i) {
+        star[i].draw();
+    }
+}
 /**
  * This function is located here because of its middle
  * ground in relation to asteroids and players in the current
@@ -49,9 +119,12 @@ void asteroidDestroy(){
         for (int i = 0; i < asteroidBelt.size(); i++){
             //but only if its the targeted asteroid
             if (asteroidBelt[i].getTargeted() == true){
+                p.setScore(p.getScore() + asteroidBelt[i].getSize() * 2); // setting the users score
+                PI.getPlayerScore(p.getScore());
                 asteroidBelt[i].setSentence(s);
-                asteroidBelt[i].setPosition(Position(asteroidBelt[i].getPosition().getX(), 150)); //reset the height
+                asteroidBelt[i].setPosition(Position(asteroidBelt[i].getPosition().getX(), 50)); //reset the height
             }
+
         }
         targetedAsteroid = PI.tabAsteroidTarget(asteroidBelt);
         p.setPosition(Position(targetedAsteroid.getPosition().getX() - 60, p.getPosition().getY()));
@@ -59,26 +132,17 @@ void asteroidDestroy(){
     }
 }
 
-void drawStars() {
 
-    for (int i = 0; i < flames.size(); ++i) {
-        flames[i].draw();
-    }
-
-    // draw the stars
-    for (int i = 0; i < star.size(); ++i) {
-        star[i].draw();
-    }
-}
 
 void init() {
+    selectedScreen = starto;
     /**
      * Initializing all objects positions
      * and board width/height, as well as
      * the asteroid vector
      */
-    width = 1200;
-    height = 1000;
+    width = 1350;
+    height = 850;
     asteroidOne = Asteroid(Position(width/2 - 300, 150), 1);
     asteroidTwo = Asteroid(Position(width/2, 150), 2);
     asteroidThree = Asteroid(Position(width/2 + 300, 150), 3);
@@ -124,26 +188,7 @@ void initGL() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Black and opaque
 }
 
-void gamePlayScreen() {
 
-    drawStars();
-
-    p.draw();
-
-    /**
-     * Drawling asteroid belt
-     */
-    for (int i = 0; i < asteroidBelt.size(); i++) {
-        asteroidBelt[i].draw(); asteroidBelt[i].setIsDrawn(true);
-        asteroidBelt[i].playerInteraction(p);
-    }
-
-
-    /**
-     * Draw what user types
-     */
-    PI.draw(width, height);
-}
 
 /* Handler for window-repaint event. Call back when the window first appears and
  whenever the window needs to be re-painted. */
@@ -165,9 +210,17 @@ void display() {
      * Draw here
      */
 
-    gamePlayScreen();
-
-
+    switch(selectedScreen) {
+        case starto:
+            startScreen();
+            break;
+        case game:
+            gamePlayScreen();
+            break;
+        case endo:
+            endScreen();
+            break;
+    }
 
     glFlush();  // Render now
 }
@@ -218,7 +271,14 @@ void kbdS(int key, int x, int y) {
 }
 
 void cursor(int x, int y) {
-    
+
+    if (buttonTest.isOverlapping(x,y)){
+        buttonTest.setColor(.5,.1,.1);
+        glutPostRedisplay();
+    } else {
+        buttonTest.setColor(1,1,1);
+
+    }
     
     glutPostRedisplay();
 }
@@ -226,21 +286,34 @@ void cursor(int x, int y) {
 // button will be GLUT_LEFT_BUTTON or GLUT_RIGHT_BUTTON
 // state will be GLUT_UP or GLUT_DOWN
 void mouse(int button, int state, int x, int y) {
-    
-    
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && buttonTest.isOverlapping(x,y)){
+       selectedScreen = game;
+    }
     
     glutPostRedisplay();
 }
 
 void timer(int extra) {
-    for (int i = 0; i < asteroidBelt.size(); i++){
-        asteroidBelt[i].move(0,1);
+    if (selectedScreen == game) {
+        for (int i = 0; i < asteroidBelt.size(); i++) {
+            if (asteroidBelt[i].getSize() == 1) {
+                asteroidBelt[i].move(0, 1);
+            } else {
+                asteroidBelt[i].move(0, 2);
+            }
+
+            glColor3f(1, 1, 1);
+
+            if (asteroidBelt[i].getPosition().getY() - 100 > height) {
+                selectedScreen = endo;
+            }
+        }
     }
 
     for (int i = 0; i < star.size(); ++i) {
         star[i].move(0, star[i].get_radius());
         if (star[i].get_y() > height) {
-            star[i].set_position(rand() % (int) width, 100);
+            star[i].set_position(rand() % (int) width, 0);
         }
     }
 
@@ -248,11 +321,11 @@ void timer(int extra) {
         flames[i].move(0, flames[i].get_radius() / 2);
         // if the star went off the left side of the screen
         // move it to the right side at a random y location
-        if (flames[i].get_y() > height) {
+        if (flames[i].get_y() > height -20) {
             int randX = rand()%(110-90 + 1) + 90;
             int randY = rand()%(25-20 + 1) + 20;
 
-            flames[i].set_position(p.getPosition().getX() + randX, p.getPosition().getY() + randY);
+            flames[i].set_position(p.getPosition().getX() + randX, p.getPosition().getY() - randY);
         }
     }
 
