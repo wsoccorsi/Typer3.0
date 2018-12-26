@@ -39,7 +39,7 @@ void PlayerInterface::draw(int width, int height) {
     for (int i = 0; i < getUserTyped().size(); ++i) {
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getUserTyped()[i]);
     }
-
+    glColor3f(1,1,1);
     glRasterPos2i(width/2 + 175, height-70);
     string temp = "Score: " + to_string(score);
     for(int i = 0; i < temp.size(); i++) {
