@@ -6,6 +6,7 @@
 #include "string"
 #include "Shape.h"
 #include "Button.h"
+#include "Screen.h"
 GLdouble width, height;
 int wd;
 enum screen {endo, game, starto}; screen selectedScreen;
@@ -21,11 +22,11 @@ Player p;
 PlayerInterface PI;
 vector<Circle> star(100);
 vector<Circle> flames(100);
-
 /**
  * Buttons
  */
 Button buttonTest(400, 75);
+Button retryButton(400, 75);
 
 /**
  * Asteroid Belt (or drawn asteroids)
@@ -46,27 +47,27 @@ void drawStars() {
 }
 
 void startScreen() {
+
+
     // draw the stars
     for (int i = 0; i < star.size(); ++i) {
         star[i].draw();
     }
 
-    buttonTest.setPosition(Position(width/2 - 200, height/2));
+    Screen startLogo(Position(width/2, height/2)); startLogo.draw();
+
+    buttonTest.setPosition(Position(width/2 - 200, height/2 - 200));
     buttonTest.setMessage("Start New Game");
     buttonTest.draw();
     glRasterPos2i(width/2 - 100, height/2);
     glColor3f(1,1,1);
-    string endScreen = "Welcome to TYPER!";
-    for (int i = 0; i < endScreen.size(); i++){
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, endScreen[i]);
-    }
+
 
 }
 
 void gamePlayScreen() {
 
     if (selectedScreen == game) {
-        cout << "here" << endl;
         drawStars();
 
         p.draw();
@@ -89,16 +90,39 @@ void gamePlayScreen() {
 }
 
 void endScreen() {
-    glRasterPos2i(width/2 - 100, height/2);
+
+
+    // draw the stars
+    for (int i = 0; i < star.size(); ++i) {
+        star[i].draw();
+    }
+
+    retryButton.setPosition(Position(width/2 - 200, height/2 - 200));
+    retryButton.setMessage("Play Again");
+    retryButton.draw();
+
+    /**
+     * Extremely strange bug, where the button somehow
+     * deletes the first text written and only displays
+     * those after. Therefore this text is never displayed
+     */
+    glRasterPos2i(width/2 - 100, height/2 + 150);
     glColor3f(1,1,1);
     string endScreen = "You DIED! Try Again?";
     for (int i = 0; i < endScreen.size(); i++){
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, endScreen[i]);
     }
-    // draw the stars
-    for (int i = 0; i < star.size(); ++i) {
-        star[i].draw();
+
+    /**
+     * This text is displayed
+     */
+    glRasterPos2i(width/2 - 100, height/2);
+    string score = "You Scored: ";
+    score += to_string(p.getScore());
+    for (int i = 0; i < score.size(); i++){
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, score[i]);
     }
+
 }
 /**
  * This function is located here because of its middle
@@ -146,6 +170,7 @@ void init() {
     asteroidOne = Asteroid(Position(width/2 - 300, 150), 1);
     asteroidTwo = Asteroid(Position(width/2, 150), 2);
     asteroidThree = Asteroid(Position(width/2 + 300, 150), 3);
+
 
 
     /**
@@ -277,8 +302,23 @@ void cursor(int x, int y) {
         glutPostRedisplay();
     } else {
         buttonTest.setColor(1,1,1);
-
     }
+
+    if (retryButton.isOverlapping(x,y)){
+        retryButton.setColor(.5,.1,.1);
+        /**
+         * Resetting the whole game
+         */
+        for (int i = 0; i < asteroidBelt.size(); ++i){
+        asteroidBelt[i].setPosition(Position(asteroidBelt[i].getPosition().getX(), 0));
+        }
+        p.setScore(0);
+
+        glutPostRedisplay();
+    } else {
+        retryButton.setColor(1,1,1);
+    }
+
     
     glutPostRedisplay();
 }
@@ -289,7 +329,9 @@ void mouse(int button, int state, int x, int y) {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && buttonTest.isOverlapping(x,y)){
        selectedScreen = game;
     }
-    
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && retryButton.isOverlapping(x,y)){
+        selectedScreen = game;
+    }
     glutPostRedisplay();
 }
 

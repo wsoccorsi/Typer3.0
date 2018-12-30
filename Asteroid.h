@@ -34,6 +34,10 @@ public:
 
     void setTargeted(bool b);
 
+    void setFill(double r, double g, double b);
+
+    Color getFill() const;
+
 
 
 protected:
@@ -43,6 +47,7 @@ protected:
     string userTyped;
     bool targeted = false;
     int pid;
+    Color fill;
 };
 
 

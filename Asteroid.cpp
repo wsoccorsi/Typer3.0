@@ -24,6 +24,14 @@ void Asteroid::move(int x, int y) {
     AbstractSpaceObject::move(x,y);
 }
 
+Color Asteroid::getFill() const {
+    return fill;
+}
+
+void Asteroid::setFill(double r, double g, double b) {
+    fill = {r,g,b};
+}
+
 void Asteroid::draw() {
 
     /** Following texture code from:
@@ -71,11 +79,11 @@ void Asteroid::draw() {
 
     glTexImage2D(GL_TEXTURE_2D, 0, TEX_INTERNAL, 16, 16, 0, TEX_FORMAT, TEX_TYPE, player_texture);
 
-//disabling mipmaps for this texture to be "complete"
+    //disabling mipmaps for this texture to be "complete"
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-//drwaing a quad with the texture
+    //drwaing a quad with the texture
 
     glEnable(GL_TEXTURE_2D);
     glBegin(GL_QUADS);
@@ -109,29 +117,32 @@ void Asteroid::draw() {
     }
 
     if (getTargeted()) {
-        glColor3f(1,1,0);
+        fill = {1,1,0};
+        glColor3f(fill.red,fill.green,fill.blue);
         glRasterPos2i(getPosition().getX(), getPosition().getY());
 
         for (int i = 0; i < line1; ++i) {
-
             if (userTyped[i] == getSentence().getString()[i] && getTargeted()
                 //edge case for correct linear inputs
                 && userTyped.substr(0,i) == getSentence().getString().substr(0,i))
               {
-                glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getSentence().getString()[i]);
+                  fill = {0,0,0};
+                  glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getSentence().getString()[i]);
             } else {
-
-                glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, getSentence().getString()[i]);
+                    fill = {1,1,1};
+                  glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, getSentence().getString()[i]);
             }
 
         }
     } else {
-        glColor3f(1,1,1);
+        fill = {1,1,1};
+        glColor3f(fill.red,fill.green,fill.blue);
         glRasterPos2i(getPosition().getX(), getPosition().getY());
         for (int i = 0; i < line1; ++i) {
             if (userTyped[i] == getSentence().getString()[i] && getTargeted()
                 //edge case for correct linear inputs
                 && userTyped.substr(0,i) == getSentence().getString().substr(0,i)) {
+                fill = {0,0,0};
                 glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getSentence().getString()[i]);
             } else {
 
@@ -146,8 +157,9 @@ void Asteroid::draw() {
      * way to do this)
      */
     if (getTargeted()) {
-        glColor3f(1,1,0);
-        glRasterPos2i(getPosition().getX() + 5, getPosition().getY() + 15);
+        fill = {1,1,0};
+        glColor3f(fill.red,fill.green,fill.blue);
+        glRasterPos2i(getPosition().getX(), getPosition().getY() + 15);
 
         for (int i = line1; i < line2; ++i) {
 
@@ -163,8 +175,9 @@ void Asteroid::draw() {
 
         }
     } else {
-        glColor3f(1,1,1);
-        glRasterPos2i(getPosition().getX() + 5, getPosition().getY() + 15) ;
+        fill = {1,1,1};
+        glColor3f(fill.red,fill.green,fill.blue);
+        glRasterPos2i(getPosition().getX(), getPosition().getY() + 15) ;
         for (int i = line1; i < line2; ++i) {
             if (userTyped[i] == getSentence().getString()[i] && getTargeted()
                 //edge case for correct linear inputs

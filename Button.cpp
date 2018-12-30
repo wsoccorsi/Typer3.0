@@ -32,6 +32,8 @@ void Button::draw(){
     for (int i = 0; i < getMessage().size(); ++i) {
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, getMessage()[i]);
     }
+
+    glEnd();
 }
 
 void Button::setColor(double r, double g, double b) {
