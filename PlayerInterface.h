@@ -38,7 +38,7 @@ private:
 
     Asteroid targetedAsteroid;
 
-    int score;
+    int score = 0;
 };
 
 

@@ -146,7 +146,7 @@ void asteroidDestroy(){
                 p.setScore(p.getScore() + asteroidBelt[i].getSize() * 2); // setting the users score
                 PI.getPlayerScore(p.getScore());
                 asteroidBelt[i].setSentence(s);
-                asteroidBelt[i].setPosition(Position(asteroidBelt[i].getPosition().getX(), 50)); //reset the height
+                asteroidBelt[i].setPosition(Position(asteroidBelt[i].getPosition().getX(), -100)); //reset the height
             }
 
         }
@@ -312,7 +312,9 @@ void cursor(int x, int y) {
         for (int i = 0; i < asteroidBelt.size(); ++i){
         asteroidBelt[i].setPosition(Position(asteroidBelt[i].getPosition().getX(), 0));
         }
-        p.setScore(0);
+
+
+
 
         glutPostRedisplay();
     } else {
@@ -331,6 +333,8 @@ void mouse(int button, int state, int x, int y) {
     }
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && retryButton.isOverlapping(x,y)){
         selectedScreen = game;
+        p.setScore(0);
+        PI.getPlayerScore(p.getScore());
     }
     glutPostRedisplay();
 }

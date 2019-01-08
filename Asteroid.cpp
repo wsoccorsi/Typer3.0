@@ -32,6 +32,8 @@ void Asteroid::setFill(double r, double g, double b) {
     fill = {r,g,b};
 }
 
+
+
 void Asteroid::draw() {
 
     /** Following texture code from:
@@ -49,55 +51,89 @@ void Asteroid::draw() {
 #define R 0xf30f
 #define W 0xffff
 #define X 0x0000
-#define G 0x5c6c
 #define B 0x111f
+#define G 0xffd5
+#define L 0xffd7
+#define D 0xffd3
 
 
-
-    unsigned short player_texture [(16 * 16)] = {
+    unsigned short asteroidSmall[(16 * 16)] = {
             //touches bottom screen
             X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,B,B,B,B,X,X,X,X,X,X,
-            X,X,X,X,X,B,B,B,B,B,B,X,X,X,X,X,
-            X,X,X,X,B,B,B,B,B,B,B,B,X,X,X,X,
-            X,X,X,X,B,B,B,B,B,B,B,B,X,X,X,X,
-            X,X,X,X,B,B,B,B,B,B,B,B,X,X,X,X,
-            X,X,X,X,X,B,B,B,B,B,B,X,X,X,X,X,
-            X,X,X,X,X,X,B,B,B,B,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
+            X,X,X,X,X,X,X,X,X,D,D,X,X,X,X,X,
+            X,X,X,D,D,D,D,D,D,G,G,D,D,D,X,X,
+            X,X,D,D,G,G,G,G,G,G,G,G,G,G,D,X,
+            X,D,D,G,G,D,G,G,G,G,G,G,G,G,G,D,
+            D,G,G,G,D,L,G,G,G,D,D,G,G,G,G,D,
+            D,G,G,D,L,G,G,G,G,G,D,L,G,G,G,D,
+            D,G,G,G,G,G,G,G,G,G,L,G,D,D,D,X,
+            D,G,G,G,G,G,G,G,D,G,G,D,X,X,X,X,
+            D,G,D,G,G,G,G,G,G,G,G,D,X,X,X,X,
+            D,G,G,D,D,D,G,G,G,D,D,X,X,X,X,X,
+            X,D,D,D,X,X,D,D,D,D,X,X,X,X,X,X,
             X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
 
 
-            //points towards aseroids (gun point)
+            //points to top
+    };
+
+    unsigned short asteroidLarge[(16 * 16)] = {
+            //touches bottom screen
+            X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
+            X,X,X,X,X,X,X,X,X,D,D,X,X,X,X,X,
+            X,X,X,D,D,D,D,D,D,G,G,D,D,D,X,X,
+            X,X,D,D,G,G,G,G,G,G,G,G,G,G,D,X,
+            X,D,D,G,G,D,G,G,G,G,G,G,G,G,G,D,
+            D,G,G,G,D,L,G,G,G,D,D,G,G,G,G,D,
+            D,G,G,D,L,G,G,G,G,G,D,L,G,G,G,D,
+            D,G,G,G,G,G,G,G,G,G,L,G,D,D,D,X,
+            D,G,G,G,G,G,G,G,D,G,G,D,X,X,X,X,
+            D,G,D,G,G,G,G,G,G,G,G,D,X,X,X,X,
+            D,G,G,D,D,D,G,G,G,D,D,X,X,X,X,X,
+            X,D,D,D,X,X,D,D,D,D,X,X,X,X,X,X,
+            X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
+
+
+            //points to top
     };
 
 
 
+    if (getSentence().getString().size() <= 4) {
+        s = SMALL;
+        setSize(1);
+        glTexImage2D(GL_TEXTURE_2D, 0, TEX_INTERNAL, 16, 16, 0, TEX_FORMAT, TEX_TYPE, asteroidSmall);
+        glEnable(GL_TEXTURE_2D);
+        glBegin(GL_QUADS);
+        glTexCoord2f(0, 0); glVertex2i(getPosition().getX() - 50, getPosition().getY()+50);//glVertex2f(16,  16);
+        glTexCoord2f(1, 0); glVertex2i(getPosition().getX() + 50, getPosition().getY()+50);//glVertex2f(0, 16);
+        glTexCoord2f(1, 1); glVertex2i(getPosition().getX() + 50, getPosition().getY() -50);//glVertex2f(0,0);
+        glTexCoord2f(0, 1); glVertex2i(getPosition().getX() - 50, getPosition().getY() -50);//glVertex2f(16, 0);
+    } else {
+        s = LARGE;
+        setSize(2);
+        glTexImage2D(GL_TEXTURE_2D, 0, TEX_INTERNAL, 16, 16, 0, TEX_FORMAT, TEX_TYPE, asteroidLarge);
+        glEnable(GL_TEXTURE_2D);
+        glBegin(GL_QUADS);
+        glTexCoord2f(0, 0); glVertex2i(getPosition().getX() - 75, getPosition().getY()+75);//glVertex2f(16,  16);
+        glTexCoord2f(1, 0); glVertex2i(getPosition().getX() + 75, getPosition().getY()+75);//glVertex2f(0, 16);
+        glTexCoord2f(1, 1); glVertex2i(getPosition().getX() + 75, getPosition().getY() -75);//glVertex2f(0,0);
+        glTexCoord2f(0, 1); glVertex2i(getPosition().getX() - 75, getPosition().getY() -75);//glVertex2f(16, 0);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, TEX_INTERNAL, 16, 16, 0, TEX_FORMAT, TEX_TYPE, player_texture);
-
+    }
     //disabling mipmaps for this texture to be "complete"
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-    //drwaing a quad with the texture
+    //drawing a quad with the texture
 
-    glEnable(GL_TEXTURE_2D);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0, 0); glVertex2i(getPosition().getX() - 100, getPosition().getY()+100);//glVertex2f(16,  16);
-    glTexCoord2f(1, 0); glVertex2i(getPosition().getX() + 150, getPosition().getY()+100);//glVertex2f(0, 16);
-    glTexCoord2f(1, 1); glVertex2i(getPosition().getX() + 150, getPosition().getY() -150);//glVertex2f(0,0);
-    glTexCoord2f(0, 1); glVertex2i(getPosition().getX() - 100, getPosition().getY() -150);//glVertex2f(16, 0);
+
 
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
 
 
-    glEnd();
 
 
 
@@ -108,18 +144,22 @@ void Asteroid::draw() {
         if (getSentence().getString()[i] == ' ') {
             line1 = i;
             line2 = getSentence().getString().size();
-            setSize(1);
+            //setSize(1);
             break;
         } else {
             line1 = getSentence().getString().size();
-            setSize(2);
+            //setSize(2);
         }
     }
 
     if (getTargeted()) {
         fill = {1,1,0};
         glColor3f(fill.red,fill.green,fill.blue);
-        glRasterPos2i(getPosition().getX(), getPosition().getY());
+        if (s == SMALL) {
+            glRasterPos2i(getPosition().getX() - 15, getPosition().getY() + 5);
+        } else {
+            glRasterPos2i(getPosition().getX() - 20, getPosition().getY() + 15);
+        }
 
         for (int i = 0; i < line1; ++i) {
             if (userTyped[i] == getSentence().getString()[i] && getTargeted()
@@ -135,9 +175,13 @@ void Asteroid::draw() {
 
         }
     } else {
+        if (s == SMALL) {
+            glRasterPos2i(getPosition().getX() - 15, getPosition().getY() + 5);
+        } else {
+            glRasterPos2i(getPosition().getX() - 20, getPosition().getY() + 15);
+        }
         fill = {1,1,1};
         glColor3f(fill.red,fill.green,fill.blue);
-        glRasterPos2i(getPosition().getX(), getPosition().getY());
         for (int i = 0; i < line1; ++i) {
             if (userTyped[i] == getSentence().getString()[i] && getTargeted()
                 //edge case for correct linear inputs
@@ -157,9 +201,13 @@ void Asteroid::draw() {
      * way to do this)
      */
     if (getTargeted()) {
+        if (s == SMALL) {
+            glRasterPos2i(getPosition().getX() - 15, getPosition().getY() + 5);
+        } else {
+            glRasterPos2i(getPosition().getX() - 20, getPosition().getY() + 15);
+        }
         fill = {1,1,0};
         glColor3f(fill.red,fill.green,fill.blue);
-        glRasterPos2i(getPosition().getX(), getPosition().getY() + 15);
 
         for (int i = line1; i < line2; ++i) {
 
@@ -175,9 +223,13 @@ void Asteroid::draw() {
 
         }
     } else {
+        if (s == SMALL) {
+            glRasterPos2i(getPosition().getX() - 15, getPosition().getY() + 5);
+        } else {
+            glRasterPos2i(getPosition().getX() - 20, getPosition().getY() + 15);
+        }
         fill = {1,1,1};
         glColor3f(fill.red,fill.green,fill.blue);
-        glRasterPos2i(getPosition().getX(), getPosition().getY() + 15) ;
         for (int i = line1; i < line2; ++i) {
             if (userTyped[i] == getSentence().getString()[i] && getTargeted()
                 //edge case for correct linear inputs

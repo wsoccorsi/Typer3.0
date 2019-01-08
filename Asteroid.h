@@ -10,6 +10,7 @@
 #include "Sentence.h"
 #include "Player.h"
 
+enum size {SMALL, LARGE, LARGER};
 
 class Asteroid : public AbstractSpaceObject {
 
@@ -40,7 +41,9 @@ public:
 
 
 
+
 protected:
+    enum size s;
     int x;
     int y;
     Sentence sentence;
