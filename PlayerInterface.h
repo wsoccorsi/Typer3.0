@@ -8,6 +8,7 @@
 
 #include "Player.h"
 #include "Asteroid.h"
+#include "Laser.h"
 #include <vector>
 
 class PlayerInterface : public Player {
@@ -39,6 +40,9 @@ private:
     Asteroid targetedAsteroid;
 
     int score = 0;
+
+    vector<Laser> lasers;
+
 };
 
 

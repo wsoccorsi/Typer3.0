@@ -12,6 +12,9 @@ struct Color {
     double blue;
 };
 
+enum size {SMALL, LARGE, LARGER};
+
+
 class AbstractSpaceObject {
 
 public:

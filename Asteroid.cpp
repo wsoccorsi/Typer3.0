@@ -33,7 +33,6 @@ void Asteroid::setFill(double r, double g, double b) {
 }
 
 
-
 void Asteroid::draw() {
 
     /** Following texture code from:
@@ -96,6 +95,7 @@ void Asteroid::draw() {
 
             //points to top
     };
+
 
 
 

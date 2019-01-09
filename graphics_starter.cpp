@@ -7,6 +7,8 @@
 #include "Shape.h"
 #include "Button.h"
 #include "Screen.h"
+#include "Laser.h"
+#include "Debris.h"
 GLdouble width, height;
 int wd;
 enum screen {endo, game, starto}; screen selectedScreen;
@@ -22,6 +24,7 @@ Player p;
 PlayerInterface PI;
 vector<Circle> star(100);
 vector<Circle> flames(100);
+vector<Debris> debrisField(10); int debrisIndex = 0;
 /**
  * Buttons
  */
@@ -81,6 +84,16 @@ void gamePlayScreen() {
             asteroidBelt[i].playerInteraction(p);
         }
 
+        /**
+         * Drawling Debris Field
+         */
+
+        for (int i = 0; i < debrisField.size(); i++){
+            if (debrisField[i].getIsDrawn() == true){
+                debrisField[i].draw();
+            }
+        }
+
 
         /**
          * Draw what user types
@@ -137,6 +150,16 @@ void asteroidDestroy(){
         //then reset the sentence
         p.resetUserTyped();
         PI.resetUserTyped();
+
+        /**
+         * work around for debris
+         */
+        debrisField[debrisIndex] = Debris(Position(targetedAsteroid.getPosition().getX(), targetedAsteroid.getPosition().getY() + 65), targetedAsteroid.getSentence().getString());
+        debrisField[debrisIndex].setIsDrawn(true);
+        debrisIndex++;
+        if (debrisIndex >= 10){
+            debrisIndex = 0;
+        }
 
         //destory this asteroid, and generate a new one
         Sentence s; s.setString(s.generateString());
@@ -372,6 +395,15 @@ void timer(int extra) {
             int randY = rand()%(25-20 + 1) + 20;
 
             flames[i].set_position(p.getPosition().getX() + randX, p.getPosition().getY() - randY);
+        }
+    }
+
+    for (int i = 0; i < debrisField.size(); i++){
+        if(debrisField[i].getIsDrawn() == true){
+            debrisField[i].move(0,2);
+            if (debrisField[i].getPosition().getY() > height){
+                debrisField[i].setIsDrawn(false);
+            }
         }
     }
 
