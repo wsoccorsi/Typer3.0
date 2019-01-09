@@ -71,13 +71,16 @@ void startScreen() {
 void gamePlayScreen() {
 
     if (selectedScreen == game) {
+
         drawStars();
 
         p.draw();
 
+
+
         /**
-         * Drawling asteroid belt
-         */
+        * Drawling asteroid belt
+        */
         for (int i = 0; i < asteroidBelt.size(); i++) {
             asteroidBelt[i].draw();
             asteroidBelt[i].setIsDrawn(true);
@@ -365,11 +368,7 @@ void mouse(int button, int state, int x, int y) {
 void timer(int extra) {
     if (selectedScreen == game) {
         for (int i = 0; i < asteroidBelt.size(); i++) {
-            if (asteroidBelt[i].getSize() == 1) {
-                asteroidBelt[i].move(0, 1);
-            } else {
-                asteroidBelt[i].move(0, 2);
-            }
+            asteroidBelt[i].move(0,asteroidBelt[i].getSize() + (p.getScore() * .01));
 
             glColor3f(1, 1, 1);
 
@@ -400,7 +399,7 @@ void timer(int extra) {
 
     for (int i = 0; i < debrisField.size(); i++){
         if(debrisField[i].getIsDrawn() == true){
-            debrisField[i].move(0,2);
+            debrisField[i].move(0,debrisField[i].getSentence().size()/2);
             if (debrisField[i].getPosition().getY() > height){
                 debrisField[i].setIsDrawn(false);
             }

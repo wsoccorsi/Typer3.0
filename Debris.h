@@ -22,9 +22,9 @@ public:
 
     Debris(Position p, std::string sentence);
 
-
     virtual void draw() override;
 
+    std::string getSentence() const;
 
 
 

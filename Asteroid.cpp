@@ -79,17 +79,17 @@ void Asteroid::draw() {
     unsigned short asteroidLarge[(16 * 16)] = {
             //touches bottom screen
             X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
-            X,X,X,X,X,X,X,X,X,D,D,X,X,X,X,X,
-            X,X,X,D,D,D,D,D,D,G,G,D,D,D,X,X,
-            X,X,D,D,G,G,G,G,G,G,G,G,G,G,D,X,
-            X,D,D,G,G,D,G,G,G,G,G,G,G,G,G,D,
-            D,G,G,G,D,L,G,G,G,D,D,G,G,G,G,D,
-            D,G,G,D,L,G,G,G,G,G,D,L,G,G,G,D,
-            D,G,G,G,G,G,G,G,G,G,L,G,D,D,D,X,
-            D,G,G,G,G,G,G,G,D,G,G,D,X,X,X,X,
-            D,G,D,G,G,G,G,G,G,G,G,D,X,X,X,X,
-            D,G,G,D,D,D,G,G,G,D,D,X,X,X,X,X,
-            X,D,D,D,X,X,D,D,D,D,X,X,X,X,X,X,
+            X,X,X,X,D,D,D,D,D,D,X,X,X,X,X,X,
+            X,X,X,D,G,G,G,G,G,G,D,D,D,X,X,X,
+            X,X,D,G,G,G,G,G,G,G,G,G,D,X,X,X,
+            X,D,G,G,G,G,G,G,G,L,G,G,G,D,X,X,
+            D,G,G,L,G,G,G,G,D,D,L,G,G,D,X,X,
+            D,G,G,D,L,G,G,G,G,D,G,G,G,G,D,X,
+            X,D,G,D,L,G,G,G,G,G,G,G,G,G,G,D,
+            X,D,G,G,G,G,G,G,G,G,G,G,L,G,G,D,
+            D,D,G,G,G,G,G,G,D,D,D,G,D,G,G,D,
+            X,D,D,G,G,G,G,D,X,X,D,G,G,G,D,X,
+            X,X,D,D,D,D,D,D,X,X,X,D,D,D,X,X,
             X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,
 
 
@@ -101,7 +101,7 @@ void Asteroid::draw() {
 
     if (getSentence().getString().size() <= 4) {
         s = SMALL;
-        setSize(1);
+        setSize(2);
         glTexImage2D(GL_TEXTURE_2D, 0, TEX_INTERNAL, 16, 16, 0, TEX_FORMAT, TEX_TYPE, asteroidSmall);
         glEnable(GL_TEXTURE_2D);
         glBegin(GL_QUADS);
@@ -111,7 +111,7 @@ void Asteroid::draw() {
         glTexCoord2f(0, 1); glVertex2i(getPosition().getX() - 50, getPosition().getY() -50);//glVertex2f(16, 0);
     } else {
         s = LARGE;
-        setSize(2);
+        setSize(1);
         glTexImage2D(GL_TEXTURE_2D, 0, TEX_INTERNAL, 16, 16, 0, TEX_FORMAT, TEX_TYPE, asteroidLarge);
         glEnable(GL_TEXTURE_2D);
         glBegin(GL_QUADS);

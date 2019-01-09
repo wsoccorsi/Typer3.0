@@ -12,7 +12,9 @@ sentence = s;
 }
 
 
-
+std::string Debris::getSentence() const {
+    return sentence;
+}
 void Debris::draw() {
 
     /** Following texture code from:
@@ -41,15 +43,15 @@ void Debris::draw() {
             X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,
             X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,
             X, X, X, X, G, X, X, X, X, X, X, X, X, X, X, X,
-            X, X, X, X, D, G, X, X, X, X, X, G, G, X, X, X,
-            X, X, X, X, G, X, X, X, X, X, X, G, G, X, X, X,
+            X, X, X, X, D, G, X, X, X, X, X, X, X, X, X, X,
+            X, X, X, X, G, X, X, X, X, X, X, X, G, X, X, X,
             X, X, X, X, X, X, X, X, X, X, X, G, X, X, X, X,
             X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,
-            X, X, D, D, X, X, X, G, X, X, X, X, X, X, X, X,
-            X, X, D, G, X, X, G, G, X, X, X, X, X, X, X, X,
-            X, X, X, X, X, X, G, D, X, X, X, X, X, X, X, X,
             X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,
             X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,
+            X, X, X, X, X, X, G, X, X, X, X, X, X, X, X, X,
+            X, X, X, X, G, G, X, X, X, X, X, X, X, X, X, X,
+            X, X, X, X, X, D, X, X, X, X, X, X, X, X, X, X,
             X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,
 
 
