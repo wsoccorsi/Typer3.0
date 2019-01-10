@@ -137,6 +137,9 @@ void Asteroid::draw() {
 
 
 
+    /**
+     * Line of each asteroid string
+     */
     int line1 = 0;
     int line2 = 0;
 

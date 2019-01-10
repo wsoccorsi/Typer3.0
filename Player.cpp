@@ -127,5 +127,6 @@ void Player::draw() {
 
     glEnd();
 
+    glDisable(GL_TEXTURE_2D);
 
 }

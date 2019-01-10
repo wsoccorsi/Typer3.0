@@ -34,6 +34,7 @@ public:
 
 
 
+
 private:
     string userTyped;
 
@@ -41,7 +42,6 @@ private:
 
     int score = 0;
 
-    vector<Laser> lasers;
 
 };
 

@@ -9,6 +9,7 @@
 #include "Screen.h"
 #include "Laser.h"
 #include "Debris.h"
+
 GLdouble width, height;
 int wd;
 enum screen {endo, game, starto}; screen selectedScreen;
@@ -25,6 +26,7 @@ PlayerInterface PI;
 vector<Circle> star(100);
 vector<Circle> flames(100);
 vector<Debris> debrisField(10); int debrisIndex = 0;
+vector<Laser> laserField(50); int laserIndex = 0;
 /**
  * Buttons
  */
@@ -94,6 +96,15 @@ void gamePlayScreen() {
         for (int i = 0; i < debrisField.size(); i++){
             if (debrisField[i].getIsDrawn() == true){
                 debrisField[i].draw();
+            }
+        }
+
+        /**
+         * Drawling Lasers
+         */
+        for (int i = 0; i < laserField.size(); i++){
+            if (laserField[i].getIsDrawn() == true){
+                laserField[i].draw();
             }
         }
 
@@ -177,7 +188,7 @@ void asteroidDestroy(){
 
         }
         targetedAsteroid = PI.tabAsteroidTarget(asteroidBelt);
-        p.setPosition(Position(targetedAsteroid.getPosition().getX() - 60, p.getPosition().getY()));
+        p.setPosition(Position(targetedAsteroid.getPosition().getX() - 100, p.getPosition().getY()));
 
     }
 }
@@ -289,10 +300,19 @@ void kbd(unsigned char key, int x, int y)
     if(key == 9) {
             targetedAsteroid = PI.tabAsteroidTarget(asteroidBelt);
             p.resetUserTyped();
-            p.setPosition(Position(targetedAsteroid.getPosition().getX() - 60, p.getPosition().getY()));
+            p.setPosition(Position(targetedAsteroid.getPosition().getX()-100, p.getPosition().getY()));
             PI.resetUserTyped();
+        } else if (key != 127) {
+
+        laserField[laserIndex] = Laser(Position(p.getPosition().getX() + 100, p.getPosition().getY() - 150));
+        laserField[laserIndex].setIsDrawn(true);
+        laserIndex++;
+
+        if (laserIndex >= laserField.size()) {
+            laserIndex = 0;
         }
 
+    }
     asteroidDestroy();
     glFlush();
     glutPostRedisplay();
@@ -368,12 +388,29 @@ void mouse(int button, int state, int x, int y) {
 void timer(int extra) {
     if (selectedScreen == game) {
         for (int i = 0; i < asteroidBelt.size(); i++) {
-            asteroidBelt[i].move(0,asteroidBelt[i].getSize() + (p.getScore() * .01));
+            asteroidBelt[i].move(0, asteroidBelt[i].getSize() + (p.getScore() * .01));
 
             glColor3f(1, 1, 1);
 
             if (asteroidBelt[i].getPosition().getY() - 100 > height) {
                 selectedScreen = endo;
+            }
+        }
+        for (int i = 0; i < debrisField.size(); i++) {
+            if (debrisField[i].getIsDrawn() == true) {
+                debrisField[i].move(0, debrisField[i].getSentence().size() / 2);
+                if (debrisField[i].getPosition().getY() > height) {
+                    debrisField[i].setIsDrawn(false);
+                }
+            }
+        }
+
+        for (int i = 0; i < laserField.size(); i++) {
+            if (laserField[i].getIsDrawn() == true) {
+                laserField[i].move(0, -50);
+                if (laserField[i].getPosition().getY() <= targetedAsteroid.getPosition().getY() + 100){
+                    laserField[i].setIsDrawn(false);
+                }
             }
         }
     }
@@ -397,14 +434,7 @@ void timer(int extra) {
         }
     }
 
-    for (int i = 0; i < debrisField.size(); i++){
-        if(debrisField[i].getIsDrawn() == true){
-            debrisField[i].move(0,debrisField[i].getSentence().size()/2);
-            if (debrisField[i].getPosition().getY() > height){
-                debrisField[i].setIsDrawn(false);
-            }
-        }
-    }
+
 
     glutPostRedisplay();
     glutTimerFunc(30, timer, 0);

@@ -95,6 +95,7 @@ void PlayerInterface::setTargetedAsteroid(Asteroid &a) {
 }
 
 string PlayerInterface::keyStrokeListener(int key, int wd) {
+
     // escape
     if (key == 27) {
         glutDestroyWindow(wd);

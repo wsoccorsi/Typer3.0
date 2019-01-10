@@ -6,6 +6,7 @@
 #define TYPER3_0_SHE_DIDN_T_WORK_SO_GOOD_MR_STARK_ABSTRACTSPACEOBJECT_H
 
 #include "Position.h"
+
 struct Color {
     double red;
     double green;
