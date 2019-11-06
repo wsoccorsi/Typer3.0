@@ -73,7 +73,7 @@ color Circle::getFill() const {
 
 
 void Circle::setFill(double r, double g, double b) {
-  fill.red = r;
+    fill.red = r;
     fill.green = g;
     fill.blue = b;
 }
@@ -101,7 +101,9 @@ void Circle::draw() const {
         glVertex2i(position.x+radius*cos(radian),
                    position.y+radius*sin(radian));
     }
+    glColor3f(1,1,1);
     glEnd();
+
 
 }
 

@@ -36,7 +36,7 @@ public:
 
 
 private:
-    string userTyped;
+//    string userTyped;
 
     Asteroid targetedAsteroid;
 

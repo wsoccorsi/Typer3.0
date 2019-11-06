@@ -40,15 +40,17 @@ vector<Asteroid> asteroidBelt;
 vector<AbstractSpaceObject> drawVec;
 
 void drawStars() {
+    // draw the stars
+    for (int i = 0; i < star.size(); ++i) {
+        star[i].draw();
+    }
 
     for (int i = 0; i < flames.size(); ++i) {
         flames[i].draw();
     }
 
-    // draw the stars
-    for (int i = 0; i < star.size(); ++i) {
-        star[i].draw();
-    }
+
+
 }
 
 void startScreen() {
@@ -73,11 +75,11 @@ void startScreen() {
 void gamePlayScreen() {
 
     if (selectedScreen == game) {
-
-        drawStars();
+        // draw the stars
 
         p.draw();
 
+        drawStars();
 
 
         /**
@@ -113,6 +115,8 @@ void gamePlayScreen() {
          * Draw what user types
          */
         PI.draw(width, height);
+
+
     }
 }
 
@@ -217,8 +221,7 @@ void init() {
     p.sizeOfBelt(asteroidBelt.size());
     asteroidBelt[0].setTargeted(true); targetedAsteroid = asteroidOne; PI.setTargetedAsteroid(targetedAsteroid);
     p = Player(Position(targetedAsteroid.getPosition().getX() - 60, height/2 + 370));
-    drawVec.push_back(asteroidOne); drawVec.push_back(asteroidTwo);
-    drawVec.push_back(asteroidThree); drawVec.push_back(p);
+
 
 
     /**
@@ -386,8 +389,15 @@ void mouse(int button, int state, int x, int y) {
 }
 
 void timer(int extra) {
+    for (int i = 0; i < star.size(); ++i) {
+        star[i].move(0, star[i].get_radius());
+        if (star[i].get_y() > height) {
+            star[i].set_position(rand() % (int) width, 0);
+        }
+    }
     if (selectedScreen == game) {
         for (int i = 0; i < asteroidBelt.size(); i++) {
+
             asteroidBelt[i].move(0, asteroidBelt[i].getSize() + (p.getScore() * .01));
 
             glColor3f(1, 1, 1);
@@ -415,12 +425,7 @@ void timer(int extra) {
         }
     }
 
-    for (int i = 0; i < star.size(); ++i) {
-        star[i].move(0, star[i].get_radius());
-        if (star[i].get_y() > height) {
-            star[i].set_position(rand() % (int) width, 0);
-        }
-    }
+
 
     for (int i = 0; i < flames.size(); ++i) {
         flames[i].move(0, flames[i].get_radius() / 2);

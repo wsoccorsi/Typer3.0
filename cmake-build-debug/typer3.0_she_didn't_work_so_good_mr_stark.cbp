@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="typer3.0_she_didn&apos;t_work_so_good_mr_stark"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="main.cpp">
+				<Option output="/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/main.cpp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/System/Library/Frameworks/OpenGL.framework"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 main.cpp"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="main.cpp/fast">
+				<Option output="/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/main.cpp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/System/Library/Frameworks/OpenGL.framework"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 main.cpp/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/williamsoccorsi/CLionProjects/Typer3.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/AbstractSpaceObject.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/AbstractSpaceObject.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Asteroid.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Asteroid.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Button.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Button.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Debris.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Debris.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Laser.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Laser.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Player.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Player.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/PlayerInterface.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/PlayerInterface.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Position.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Position.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Screen.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Screen.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Sentence.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Sentence.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Shape.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/Shape.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/graphics.h">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/graphics_starter.cpp">
+			<Option target="main.cpp"/>
+		</Unit>
+		<Unit filename="/Users/williamsoccorsi/CLionProjects/Typer3.0/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

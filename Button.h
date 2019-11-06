@@ -23,7 +23,7 @@ public:
 
    void draw() override;
 
-   void setColor(double r,double g,double b);
+   void setColor(double r,double g,double b); //inheritates the color struct
 
    Color getColor();
 

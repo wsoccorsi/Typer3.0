@@ -5,7 +5,7 @@
 #include "PlayerInterface.h"
 
 PlayerInterface::PlayerInterface() {
-    userTyped = "";
+//    userTyped = "";
 
 }
 
